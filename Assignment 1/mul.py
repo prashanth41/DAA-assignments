@@ -1,7 +1,7 @@
 import time, sys
 from random import randint
 
-# To run this program
+# Use the below command to run this program
 # python -m memory_profiler mul.py
 
 # Functions
