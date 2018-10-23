@@ -4,6 +4,7 @@ import numpy as np
 import scipy
 import matplotlib.pyplot as plt
 import math
+import operator
 
 
 start_graph={1:[2,3,4],2:[1],3:[1,4],4:[1,3]}
@@ -245,44 +246,6 @@ for t in range(1, 501):
 
 
 
-
-#for Graph 3
-print("Print for p=0.8")
-for t in range(1, 501):
-	r = randint(1,10)
-
-	if len(Graph)==0:
-		Graph=start_graph
-
-	if r in range(1,9):
-		print("Birth")
-		birth_process()
-
-	elif r in range(9,11):
-		print("Death")
-		death_process()
-
-
-degree_of_nodes=[]
-for node in Graph:
-	degree_of_node.append(len(Graph[node]))
-
-distinct_degrees=set(degree_of_nodes)
-distinct_degrees=list(distinct_degrees)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #Graph 1
 fig1 = plt.figure(1)
 plt.plot(np.arange(100, 600, 100), num_of_nodes_1, color = 'green',label='p=0.6')
@@ -325,3 +288,54 @@ plt.xticks(np.arange(100, 600, 100))
 plt.xlabel('Timesteps', fontsize=16)
 plt.ylabel('num of edges', fontsize=16)
 fig2.savefig('num_of_edges.png')
+
+
+
+
+
+
+#for Graph 3
+Graph={1:[2,3,4],2:[1],3:[1,4],4:[1,3]}
+print(Graph)
+
+print("Print for p=0.8")
+for t in range(1, 501):
+	r = randint(1,10)
+
+	if len(Graph)==0:
+		Graph=start_graph
+
+	if r in range(1,9):
+		print("Birth")
+		birth_process()
+
+	elif r in range(9,11):
+		print("Death")
+		death_process()
+
+
+degree_of_nodes=[]
+for node in Graph:
+	degree_of_node.append(len(Graph[node]))
+
+distinct_degrees=set(degree_of_nodes)
+distinct_degrees=list(distinct_degrees)
+
+
+degree_dictionary={}
+
+for i in distinct_degrees:
+	degree_dictionary[i]=degree_of_nodes.count(i)
+
+
+prob_degree_dictionary=degree_dictionary
+
+temp_sum=sum(degree_dictionary.values())
+
+for i in prob_degree_dictionary:
+	prob_degree_dictionary[i]=prob_degree_dictionary[i]/(temp_sum)
+
+
+
+sorted_prob_degree_dictionary= sorted(prob_degree_dictionary.items(), key=lambda kv: kv[1])
+
