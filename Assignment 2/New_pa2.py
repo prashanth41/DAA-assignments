@@ -299,7 +299,7 @@ Graph={1:[2,3,4],2:[1],3:[1,4],4:[1,3]}
 print(Graph)
 
 print("Print for p=0.8")
-for t in range(1, 501):
+for t in range(1, 11):
 	r = randint(1,10)
 
 	if len(Graph)==0:
@@ -316,10 +316,14 @@ for t in range(1, 501):
 
 degree_of_nodes=[]
 for node in Graph:
-	degree_of_node.append(len(Graph[node]))
+	degree_of_nodes.append(len(Graph[node]))
+
 
 distinct_degrees=set(degree_of_nodes)
 distinct_degrees=list(distinct_degrees)
+distinct_degrees=distinct_degrees[::-1]
+
+print(distinct_degrees)
 
 
 degree_dictionary={}
@@ -327,15 +331,30 @@ degree_dictionary={}
 for i in distinct_degrees:
 	degree_dictionary[i]=degree_of_nodes.count(i)
 
-
-prob_degree_dictionary=degree_dictionary
-
 temp_sum=sum(degree_dictionary.values())
 
-for i in prob_degree_dictionary:
-	prob_degree_dictionary[i]=prob_degree_dictionary[i]/(temp_sum)
+
+cummulative_value=0
+
+for i in degree_dictionary:
+	cummulative_value+=degree_dictionary[i]
+	degree_dictionary[i]=cummulative_value
 
 
 
-sorted_prob_degree_dictionary= sorted(prob_degree_dictionary.items(), key=lambda kv: kv[1])
+for i in degree_dictionary:
+	degree_dictionary[i]=degree_dictionary[i]/(temp_sum)
 
+
+degree_prob=list(degree_dictionary.values())
+
+
+fig3 = plt.figure(3)
+plt.plot(distinct_degrees, degree_prob, color = 'red',label='p=0.8')
+
+plt.legend(loc='upper right')
+plt.xscale('log')
+plt.yscale('log')
+plt.xlabel('degrees (k)', fontsize=16)
+plt.ylabel('P\'(k)', fontsize=16)
+fig3.savefig('log_log_graph.png')
