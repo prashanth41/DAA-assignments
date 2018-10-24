@@ -4,6 +4,7 @@ import numpy as np
 import scipy
 import matplotlib.pyplot as plt
 import math
+import operator
 
 
 start_graph={1:[2,3,4],2:[1],3:[1,4],4:[1,3]}
@@ -136,133 +137,215 @@ num_of_edges_3=[]
 
 
 Graph={1:[2,3,4],2:[1],3:[1,4],4:[1,3]}
-print(Graph)
+#print(Graph)
 
 # For p = 0.6
-print("Print for p=0.6")
-for t in range(1, 501):
+#print("p=0.6")
+for t in range(0, 10000):
 	r = randint(1,10)
 
 	if len(Graph)==0:
 		Graph=start_graph
 
 	if r in range(1,7):
-		print("Birth")
+		#print("Birth")
 		birth_process()
 
 	elif r in range(7,11):
-		print("Death")
+		#print("Death")
 		death_process()
 
 	print("\n")
 	print(t)
-	if t%100==0:
+	if t%2500==0:
 		num_of_nodes_1.append(len(Graph))	# For Graph nodes
-		print(num_of_nodes_1)
-		print("efk")
+		#print(num_of_nodes_1)
+		#print("efk")
 
-		length = 0
-		for each_edge in graph_edges:       #Calculates the number of edges -> m
-			length += len(each_edge)
+		edges=0
 
-		length /= 2
-		number_of_edges_1.append(math.ceil(length)) # For Graph edges
+		for i in Graph:
+			edges+=len(Graph[i])
+
+		edges=math.ceil(edges/2)
+		num_of_edges_1.append(edges)
+
 
 
 
 Graph={1:[2,3,4],2:[1],3:[1,4],4:[1,3]}
 # max_node=max(Graph.keys())
-print(Graph)
+#print(Graph)
 
 # For p = 0.75
-print("Print for p=0.75")
-for t in range(1, 501):
+#print("p=0.75")
+for t in range(0, 10000):
 	r = randint(1,100)
 
 	if len(Graph)==0:
 		Graph=start_graph
 
 	if r in range(1,76):
-		print("Birth")
+		#print("Birth")
 		birth_process()
 
 	elif r in range(76,101):
-		print("Death")
+		#print("Death")
 		death_process()
 
 	print("\n")
 	print(t)
-	if t%100==0:
+	if t%2500==0:
 		num_of_nodes_2.append(len(Graph))	# For Graph nodes
-		print(num_of_nodes_2)
-		print("efk")
-		length = 0
-		for each_edge in graph_edges:       #Calculates the number of edges -> m
-			length += len(each_edge)
+		#print(num_of_nodes_2)
+		#print("efk")
+		edges=0
 
-		length /= 2
-		number_of_edges_1.append(math.ceil(length)) # For Graph edges
+		for i in Graph:
+			edges+=len(Graph[i])
+
+		edges=math.ceil(edges/2)
+		num_of_edges_2.append(edges)
 
 
 
 
 Graph={1:[2,3,4],2:[1],3:[1,4],4:[1,3]}
-print(Graph)
+#print(Graph)
 
 # For p = 0.9
-print("Print for p=0.9")
-for t in range(1, 501):
+#print("p=0.9")
+for t in range(0, 10000):
 	r = randint(1,10)
 
 	if len(Graph)==0:
 		Graph=start_graph
 
 	if r in range(1,10):
-		print("Birth")
+		#print("Birth")
 		birth_process()
 
 	elif r in range(10,11):
-		print("Death")
+		#print("Death")
 		death_process()
 
 	print("\n")
 	print(t)
-	if t%100==0:
+	if t%2500==0:
 		num_of_nodes_3.append(len(Graph))	# For Graph nodes
-		print(num_of_nodes_3)
-		print("efk")
-		length = 0
-		for each_edge in graph_edges:       #Calculates the number of edges -> m
-			length += len(each_edge)
+		#print(num_of_nodes_3)
+		#print("efk")
+		edges=0
 
-		length /= 2
-		number_of_edges_1.append(math.ceil(length)) # For Graph edges
+		for i in Graph:
+			edges+=len(Graph[i])
 
-
-
+		edges=math.ceil(edges/2)
+		num_of_edges_3.append(edges)
 
 
 
-
+#Graph1
 fig1 = plt.figure(1)
-plt.plot(np.arange(0, 500, 100), num_of_nodes_1, color = 'green',label='p=0.6')
-plt.plot(np.arange(0, 500, 100), num_of_nodes_1, 'ro')
+plt.plot(np.arange(0, 10000, 2500), num_of_nodes_1, color = 'blue',label='p=0.6')
+plt.plot(np.arange(0, 10000, 2500), num_of_nodes_1, 'g^')
 
+plt.plot(np.arange(0, 10000, 2500), num_of_nodes_2, color = 'black',label='p=0.75')
+plt.plot(np.arange(0, 10000, 2500), num_of_nodes_2, 'ro')
 
-plt.plot(np.arange(0, 500, 100), num_of_nodes_2, color = 'red',label='p=0.75')
-plt.plot(np.arange(0, 500, 100), num_of_nodes_2, 'b^')
+plt.plot(np.arange(0, 10000, 2500), num_of_nodes_3, color = 'red',label='p=0.9')
+plt.plot(np.arange(0, 10000, 2500), num_of_nodes_3, 'b^')
 
-
-plt.plot(np.arange(0, 500, 100), num_of_nodes_3, color = 'blue',label='p=0.9')
-plt.plot(np.arange(0, 500, 100), num_of_nodes_3, 'g+')
-
-
-plt.legend(loc='upper right')
-
-plt.xticks(np.arange(0, 500, 100))
-
-plt.xlabel('Timesteps', fontsize=16)
-
-plt.ylabel('num of nodes', fontsize=16)
-
+plt.legend(loc='upper left')
+plt.xticks(np.arange(0, 10000, 2500))
+plt.xlabel('Timestamp', fontsize=14)
+plt.ylabel('Number of nodes', fontsize=14)
 fig1.savefig('num_of_nodes.png')
+
+
+fig2 = plt.figure(2)
+plt.plot(np.arange(0, 10000, 2500), num_of_edges_1, color = 'blue',label='p=0.6')
+plt.plot(np.arange(0, 10000, 2500), num_of_edges_1, 'g^')
+
+plt.plot(np.arange(0, 10000, 2500), num_of_edges_2, color = 'black',label='p=0.75')
+plt.plot(np.arange(0, 10000, 2500), num_of_edges_2, 'ro')
+
+plt.plot(np.arange(0, 10000, 2500), num_of_edges_3, color = 'red',label='p=0.9')
+plt.plot(np.arange(0, 10000, 2500), num_of_edges_3, 'b^')
+
+plt.legend(loc='upper left')
+plt.xticks(np.arange(0, 10000, 2500))
+plt.xlabel('Timestamp', fontsize=14)
+plt.ylabel('Number of Edges', fontsize=14)
+fig2.savefig('num_of_edges.png')
+
+
+
+
+
+
+#for Graph 3
+Graph={1:[2,3,4],2:[1],3:[1,4],4:[1,3]}
+#print(Graph)
+
+#print("p=0.8")
+for t in range(0, 10000):
+	print(t)
+	r = randint(1,10)
+
+	if len(Graph)==0:
+		Graph=start_graph
+
+	if r in range(1,9):
+		#print("Birth")
+		birth_process()
+
+	elif r in range(9,11):
+		#print("Death")
+		death_process()
+
+
+degree_of_nodes=[]
+for node in Graph:
+	degree_of_nodes.append(len(Graph[node]))
+
+
+distinct_degrees=set(degree_of_nodes)
+distinct_degrees=list(distinct_degrees)
+distinct_degrees=distinct_degrees[::-1]
+
+#print(distinct_degrees)
+
+
+degree_dictionary={}
+
+for i in distinct_degrees:
+	degree_dictionary[i]=degree_of_nodes.count(i)
+
+temp_sum=sum(degree_dictionary.values())
+
+
+cummulative_value=0
+
+for i in degree_dictionary:
+	cummulative_value+=degree_dictionary[i]
+	degree_dictionary[i]=cummulative_value
+
+
+
+for i in degree_dictionary:
+	degree_dictionary[i]=degree_dictionary[i]/(temp_sum)
+
+
+degree_prob=list(degree_dictionary.values())
+
+
+fig3 = plt.figure(3)
+plt.plot(distinct_degrees, degree_prob, color = 'blue',label='p=0.8')
+
+plt.legend(loc='upper left')
+plt.xscale('log')
+plt.yscale('log')
+plt.xlabel('Degrees (k)', fontsize=14)
+plt.ylabel('P\'(k)', fontsize=14)
+fig3.savefig('log_log_graph.png')
