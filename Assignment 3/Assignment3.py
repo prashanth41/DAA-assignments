@@ -11,9 +11,7 @@ import matplotlib.pyplot as plt
 dic={}
 
 def testCases(n):
-
 	
-
 	for i in range(1,n+1):
 
 		start=randint(1,2*(n))
@@ -24,8 +22,6 @@ def testCases(n):
 	return dic
 
 #print(testCases(20))
-
-
 
 
 
@@ -83,8 +79,6 @@ timeForVarInput=[]
 
 for i in range(1,1001):
 
-
-
 	start=time.time()
 	print("for input size "+str(i))
 	#print(main(i))
@@ -96,7 +90,6 @@ for i in range(1,1001):
 
 
 print(timeForVarInput)
-
 
 
 fig = plt.figure(2)
